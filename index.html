@@ -805,23 +805,30 @@
         }
         
         // Function to toggle sections
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.section-content');
-            sections.forEach(section => {
-                section.classList.remove('active-section');
-            });
-            const navButtons = document.querySelectorAll('.nav-button');
-            navButtons.forEach(button => {
-                button.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active-section');
-            document.querySelector(`[onclick="showSection('${sectionId}')"]`).classList.add('active');
+      function showSection(sectionId) {
+    const sections = document.querySelectorAll('.section-content');
+    sections.forEach(section => {
+        section.classList.remove('active-section');
+    });
+    const navButtons = document.querySelectorAll('.nav-button');
+    navButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+    document.getElementById(sectionId).classList.add('active-section');
+    document.querySelector(`[onclick="showSection('${sectionId}')"]`).classList.add('active');
+    
+    // Gửi một lượt xem trang mới tới Google Analytics cho trang phụ tương ứng
+    gtag('event', 'page_view', {
+      'page_title': 'Khám phá Lịch sử 11 - ' + sectionId,
+      'page_path': '/' + sectionId
+    });
 
-            // When leaving the "knowledge" section, hide the detailed lesson content
-            if (sectionId !== 'knowledge') {
-                document.getElementById('lesson-list-display').classList.remove('hidden');
-                document.getElementById('lesson-content-display').classList.add('hidden');
-            }
+    // Khi rời khỏi trang "kiến thức", ẩn nội dung bài học chi tiết
+    if (sectionId !== 'knowledge') {
+        document.getElementById('lesson-list-display').classList.remove('hidden');
+        document.getElementById('lesson-content-display').classList.add('hidden');
+    }
+}
         }
 
         // Function to toggle lesson content
@@ -1198,6 +1205,7 @@
     </script>
 </body>
 </html>
+
 
 
 
