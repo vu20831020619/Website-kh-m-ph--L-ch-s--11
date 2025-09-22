@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khám phá Lịch sử 11</title>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RYFT9FRWQW"></script>
+    <!-- Google tag (gtag.js) --> 
+<script async src="https://www.googletagmanager.com/gtag/js?id=GRYFT9FRWQW"></script> 
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RYFT9FRWQW');
+ window.dataLayer = window.dataLayer || []; 
+function gtag(){dataLayer.push(arguments);} 
+gtag('js', new Date());
+    
+ gtag('config', 'G-RYFT9FRWQW'); 
 </script>
-    <!-- Thư viện Tailwind CSS để tạo giao diện nhanh chóng và đẹp mắt -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Phông chữ Inter từ Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -668,11 +667,11 @@
 
 
         const infographicsData = {
+            'b1': 'https://vu20831020619.github.io/Bai-1-mot-so-van-de-chung-ve-cach-mang-tu-san/',
             'b2': {
-                'Phần 1': 'https://vu20831020619.github.io/infographic_s-x-c-l-p-v-ph-t-tri-n-ch-ngh-a-t-b-n_b-i-2/',
+                'Phần 1': 'https://vu20831020619.github.io/su-xac-lap-va-phat-trien-cua-chu-nghia-tu-ban/',
                 'Phần 2': 'https://vu20831020619.github.io/chunghiatubanhiendai-tiet3/'
             },
-            'b1': 'https://placehold.co/800x600/bde0fe/000000?text=Infographic+Bài+1+sẽ+được+cập+nhật+sau',
             'b3': 'https://placehold.co/800x600/bde0fe/000000?text=Infographic+Bài+3+sẽ+được+cập+nhật+sau',
             'b4': 'https://placehold.co/800x600/bde0fe/000000?text=Infographic+Bài+4+sẽ+được+cập+nhật+sau',
             'b5': 'https://placehold.co/800x600/bde0fe/000000?text=Infographic+Bài+5+sẽ+được+cập+nhật+sau',
@@ -805,31 +804,25 @@
         }
         
         // Function to toggle sections
-      function showSection(sectionId) {
-    const sections = document.querySelectorAll('.section-content');
-    sections.forEach(section => {
-        section.classList.remove('active-section');
-    });
-    const navButtons = document.querySelectorAll('.nav-button');
-    navButtons.forEach(button => {
-        button.classList.remove('active');
-    });
-    document.getElementById(sectionId).classList.add('active-section');
-    document.querySelector(`[onclick="showSection('${sectionId}')"]`).classList.add('active');
-    
-    // Gửi một lượt xem trang mới tới Google Analytics cho trang phụ tương ứng
-    gtag('event', 'page_view', {
-      'page_title': 'Khám phá Lịch sử 11 - ' + sectionId,
-      'page_path': '/' + sectionId
-    });
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(section => {
+                section.classList.remove('active-section');
+            });
+            const navButtons = document.querySelectorAll('.nav-button');
+            navButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active-section');
+            document.querySelector(`[onclick="showSection('${sectionId}')"]`).classList.add('active');
 
-    // Khi rời khỏi trang "kiến thức", ẩn nội dung bài học chi tiết
-    if (sectionId !== 'knowledge') {
-        document.getElementById('lesson-list-display').classList.remove('hidden');
-        document.getElementById('lesson-content-display').classList.add('hidden');
-    }
-}
-        
+            // When leaving the "knowledge" section, hide the detailed lesson content
+            if (sectionId !== 'knowledge') {
+                document.getElementById('lesson-list-display').classList.remove('hidden');
+                document.getElementById('lesson-content-display').classList.add('hidden');
+            }
+        }
+
         // Function to toggle lesson content
         function toggleLesson(lessonId) {
             const lesson = document.getElementById(lessonId);
@@ -863,34 +856,62 @@
         // --- Infographic Logic ---
         function showInfographic() {
             const select = document.getElementById('infographic-select');
-            const partSelect = document.getElementById('infographic-part-select');
+            const infographicPartSelect = document.getElementById('infographic-part-select');
             const display = document.getElementById('infographic-display');
-            const iframe = document.getElementById('infographic-iframe');
-            const link = document.getElementById('infographic-link');
             const lessonId = select.value;
 
             // Clear previous content
-            partSelect.innerHTML = '<option value="">-- Chọn phần --</option>';
-            partSelect.classList.add('hidden');
+            infographicPartSelect.innerHTML = '<option value="">-- Chọn phần --</option>';
+            infographicPartSelect.classList.add('hidden');
             display.classList.add('hidden');
 
-            if (lessonId) {
+            if (lessonId && infographicsData[lessonId]) {
                 if (lessonId === 'b2') {
                     // Populate and show part select for Bài 2
-                    for (const part in infographicsData[lessonId]) {
-                        const option = document.createElement('option');
-                        option.value = infographicsData[lessonId][part];
-                        option.textContent = part;
-                        partSelect.appendChild(option);
-                    }
-                    partSelect.classList.remove('hidden');
+                    infographicPartSelect.innerHTML = '<option value="">-- Chọn phần --</option>'; // Reset the options
+                    infographicPartSelect.classList.remove('hidden');
+
+                    const part1Option = document.createElement('option');
+                    part1Option.value = infographicsData[lessonId]['Phần 1'];
+                    part1Option.textContent = 'Phần 1: Hành trình của chủ nghĩa tư bản';
+                    infographicPartSelect.appendChild(part1Option);
+
+                    const part2Option = document.createElement('option');
+                    part2Option.value = infographicsData[lessonId]['Phần 2'];
+                    part2Option.textContent = 'Phần 2: Chủ nghĩa tư bản hiện đại';
+                    infographicPartSelect.appendChild(part2Option);
+
+                    display.innerHTML = '<p class="text-center text-gray-500">Vui lòng chọn một phần để xem infographic.</p>';
+                    display.classList.remove('hidden');
+
+                } else if (lessonId === 'b1') {
+                    // Special case for Bài 1
+                    const url = infographicsData[lessonId];
+                     display.innerHTML = `
+                        <iframe src="${url}" class="w-full rounded-lg shadow-lg" style="height: 600px; border: none;"></iframe>
+                        <div class="mt-4 text-center">
+                            <a href="${url}" target="_blank" class="bg-blue-600 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:bg-blue-700 transition">
+                                Mở trong tab mới
+                            </a>
+                        </div>
+                    `;
+                    display.classList.remove('hidden');
                 } else {
                     // Show single infographic for other lessons
                     const url = infographicsData[lessonId];
-                    iframe.src = url;
-                    link.href = url;
+                    display.innerHTML = `
+                        <iframe src="${url}" class="w-full rounded-lg shadow-lg" style="height: 600px; border: none;"></iframe>
+                        <div class="mt-4 text-center">
+                            <a href="${url}" target="_blank" class="bg-blue-600 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:bg-blue-700 transition">
+                                Mở trong tab mới
+                            </a>
+                        </div>
+                    `;
                     display.classList.remove('hidden');
                 }
+            } else {
+                display.innerHTML = '<p class="text-center text-gray-500">Chưa có infographic cho bài học này.</p>';
+                display.classList.remove('hidden');
             }
         }
         
@@ -898,16 +919,21 @@
         function showInfographicPart() {
             const partSelect = document.getElementById('infographic-part-select');
             const display = document.getElementById('infographic-display');
-            const iframe = document.getElementById('infographic-iframe');
-            const link = document.getElementById('infographic-link');
             const url = partSelect.value;
             
             if (url) {
-                iframe.src = url;
-                link.href = url;
+                display.innerHTML = `
+                    <iframe src="${url}" class="w-full h-96 rounded-lg shadow-lg" style="height: 600px; border: none;"></iframe>
+                    <div class="mt-4 text-center">
+                        <a href="${url}" target="_blank" class="bg-blue-600 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:bg-blue-700 transition">
+                            Mở trong tab mới
+                        </a>
+                    </div>
+                `;
                 display.classList.remove('hidden');
             } else {
-                display.classList.add('hidden');
+                display.innerHTML = '<p class="text-center text-gray-500">Vui lòng chọn một phần để xem infographic.</p>';
+                display.classList.remove('hidden');
             }
         }
 
@@ -1204,12 +1230,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
